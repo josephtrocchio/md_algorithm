@@ -3,12 +3,14 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import metrics
+from sklearn import metrics
 
 
 def main():
     #Import the data
-
+    data = pd.read_csv('gps_data.csv')
+    print(data.head(), ...)
+    print(data.info())
     #Converting categorical data to numbers
 
     #Split into training test and test set
