@@ -1,4 +1,5 @@
 import pandas as pd
+import pprint as pp
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -13,8 +14,8 @@ def main():
 
     #Drop NaN values, as well as infinite values that bug the "float64's"
     data.dropna(axis=0)
-    data = data.isin([np.inf, -np.inf])
-    print(data)
+    data = data.replace([np.inf, -np.inf], np.nan).dropna(axis=0)
+    pp.pprint(data)
 
 
     #Dividing Data into features(x) and labels(y)
@@ -47,7 +48,7 @@ def main():
     rf_reg = RandomForestRegressor(random_state=42, n_estimators=500)
     regressor = rf_reg.fit(X_train, y_train)
     y_pred = regressor.predict(X_test)
-    print(y_pred)
+    pp.pprint(y_pred)
 
 
     #Evaluate model with metrics module
