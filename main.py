@@ -21,10 +21,9 @@ def main():
     #Dividing Data into features(x) and labels(y)
     X = data.iloc[: , :5]
     y = data.iloc[:, 5:]
+    print(X.head())
+    print(y.head())
 
-    # print(X.isnull().values.any())
-    # print(X.isnull().sum().sum())
-    # print(X.shape)
 
     #Converting categorical data to numbers
     numerical = X.drop(['Player Name', 'Period Name', 'Position Name'], axis=1)
@@ -35,7 +34,7 @@ def main():
 
 
     #Split into training test and test set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.20, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.10, random_state=0)
 
 
     #Normalize/Scale the data
@@ -48,7 +47,9 @@ def main():
     rf_reg = RandomForestRegressor(random_state=42, n_estimators=500)
     regressor = rf_reg.fit(X_train, y_train)
     y_pred = regressor.predict(X_test)
-    pp.pprint(y_pred)
+    y_pred_inverse = sc.inverse_transform(X_test)
+    pp.pprint(pd.DataFrame(y_pred_inverse))
+    pp.pprint(pd.DataFrame(y_test))
 
 
     #Evaluate model with metrics module
