@@ -44,12 +44,11 @@ def main():
     
 
     #Pick model and Train
-    rf_reg = RandomForestRegressor(random_state=42, n_estimators=500)
-    regressor = rf_reg.fit(X_train, y_train)
+    model = RandomForestRegressor()
+    regressor = model.fit(X_train, y_train)
     y_pred = regressor.predict(X_test)
-    y_pred_inverse = sc.inverse_transform(X_test)
-    pp.pprint(pd.DataFrame(y_pred_inverse))
-    pp.pprint(pd.DataFrame(y_test))
+    pd.DataFrame(y_pred).to_excel('y_pred.xlsx')
+    pd.DataFrame(y_test).to_excel('y_test.xlsx')
 
 
     #Evaluate model with metrics module
